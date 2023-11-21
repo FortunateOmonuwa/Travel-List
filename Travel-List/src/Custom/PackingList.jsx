@@ -2,14 +2,21 @@ import { useState, useEffect } from "react";
 //import InitialItems from "./Data/Data";
 import Item from "./Item";
 
-const List = ({ items }) => {
+const List = ({ items, handleDelete, handleChecked }) => {
   const [newitems, setItems] = useState([]);
   useEffect(() => {
     setItems(items);
   }, [items]);
 
   const listOfItems = newitems.map((item) => {
-    return <Item key={item.id} {...item} />;
+    return (
+      <Item
+        key={item.id}
+        {...item}
+        handleDelete={handleDelete}
+        handleChecked={handleChecked}
+      />
+    );
   });
 
   return (

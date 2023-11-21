@@ -1,22 +1,22 @@
 import { useState } from "react";
 
 /* eslint-disable react/prop-types */
-const Item = ({ quantity, item, packed }) => {
-  const [packedItem, togglePackedItem] = useState(packed);
-
-  const togglePacked = () => {
-    togglePackedItem((prev) => !prev);
-  };
+const Item = ({ quantity, item, packed, id, handleDelete, handleChecked }) => {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={packed}
+        onChange={() => {
+          handleChecked(id);
+        }}
+      />
       <span
-        style={
-          packedItem ? { textDecoration: "line-through", opacity: 0.5 } : {}
-        }
+        style={packed ? { textDecoration: "line-through", opacity: 0.5 } : {}}
       >
         {quantity} {item}
       </span>
-      <button onClick={togglePacked}>❌ </button>
+      <button onClick={() => handleDelete(id)}>❌ </button>
     </li>
   );
 };
