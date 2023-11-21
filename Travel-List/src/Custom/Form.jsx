@@ -7,7 +7,6 @@ const Form = ({ onAddItem }) => {
     item: "",
     quantity: 1,
     packed: false,
-    id: Date.now(),
   });
 
   const handleSubmit = (e) => {
@@ -18,7 +17,7 @@ const Form = ({ onAddItem }) => {
         item,
         quantity,
         packed,
-        id,
+        id: Date.now(),
       };
       console.log(newItem);
 
