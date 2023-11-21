@@ -12,7 +12,7 @@ const Form = ({ onAddItem }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.item !== "") {
-      const { item, quantity, packed, id } = input;
+      const { item, quantity, packed } = input;
       const newItem = {
         item,
         quantity,
