@@ -9,7 +9,21 @@ const List = ({ items, handleDelete, handleChecked }) => {
     setItems(items);
   }, [items]);
 
-  const listOfItems = newitems.map((item) => {
+  const [sortBy, setSortBy] = useState("description");
+
+  let sortedItems;
+
+  if (sortBy === "input") {
+    sortedItems = items;
+  } else if (sortBy === "description") {
+    sortedItems = items.slice().sort((a, b) => a.item.localeCompare(b.item));
+  } else if (sortBy === "packed") {
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.packed.localeCompare(b.packed));
+  }
+
+  const listOfItems = sortedItems.map((item) => {
     return (
       <Item
         key={item.id}
@@ -23,6 +37,19 @@ const List = ({ items, handleDelete, handleChecked }) => {
   return (
     <div className="list">
       <ul className="list">{listOfItems}</ul>
+      <div className="actions">
+        <select
+          name=""
+          id=""
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="input">Sort by input order</option>
+          <option value="description"> Sort by description</option>
+
+          <option value="packed"> Sort by packed</option>
+        </select>
+      </div>
     </div>
   );
 };
