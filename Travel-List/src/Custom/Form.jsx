@@ -5,14 +5,14 @@ const Form = ({ onAddItem }) => {
 
   const [input, setInput] = useState({
     item: "",
-    quantity: 1,
     packed: false,
+    quantity: 1,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.item !== "") {
-      const { item, quantity, packed } = input;
+      const { item, packed, quantity } = input;
       const newItem = {
         item,
         quantity,
@@ -39,7 +39,12 @@ const Form = ({ onAddItem }) => {
   return (
     <form className="add-form" onSubmit={() => handleSubmit}>
       <h3>What do you need for your trip </h3>
-      <select value={input.quantity} name="quantity" id="" onChange={setInput}>
+      <select
+        value={input.quantity}
+        name="quantity"
+        id=""
+        onChange={handleChange}
+      >
         {selectOptions.map((num) => (
           <option value={num} key={num}>
             {num}

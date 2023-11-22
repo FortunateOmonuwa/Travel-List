@@ -9,7 +9,7 @@ const List = ({ items, handleDelete, handleChecked }) => {
     setItems(items);
   }, [items]);
 
-  const [sortBy, setSortBy] = useState("description");
+  const [sortBy, setSortBy] = useState(items);
 
   let sortedItems;
 
@@ -18,9 +18,11 @@ const List = ({ items, handleDelete, handleChecked }) => {
   } else if (sortBy === "description") {
     sortedItems = items.slice().sort((a, b) => a.item.localeCompare(b.item));
   } else if (sortBy === "packed") {
-    sortedItems = items
-      .slice()
-      .sort((a, b) => a.packed.localeCompare(b.packed));
+    sortedItems = items.slice().sort((a, b) => Number(a.packed) - Number(b.packed));
+  } else if (sortBy === "quantity") {
+    sortedItems = items.slice().sort((a, b) => a.quantity - b.quantity);
+  } else {
+    sortedItems = items;
   }
 
   const listOfItems = sortedItems.map((item) => {
@@ -48,6 +50,7 @@ const List = ({ items, handleDelete, handleChecked }) => {
           <option value="description"> Sort by description</option>
 
           <option value="packed"> Sort by packed</option>
+          <option value="quantity">Sort by quantity</option>
         </select>
       </div>
     </div>
