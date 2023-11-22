@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 //import InitialItems from "./Data/Data";
 import Item from "./Item";
 
-const List = ({ items, handleDelete, handleChecked }) => {
+const List = ({ items, handleDelete, handleChecked, clearList }) => {
   const [newitems, setItems] = useState([]);
   useEffect(() => {
     setItems(items);
@@ -18,7 +18,12 @@ const List = ({ items, handleDelete, handleChecked }) => {
   } else if (sortBy === "description") {
     sortedItems = items.slice().sort((a, b) => a.item.localeCompare(b.item));
   } else if (sortBy === "packed") {
-    sortedItems = items.slice().sort((a, b) => Number(a.packed) - Number(b.packed));
+    sortedItems = items.slice().sort((a, b) => {
+      if (a.packed === b.packed) {
+        return 0;
+      }
+      return a.packed ? 1 : -1;
+    });
   } else if (sortBy === "quantity") {
     sortedItems = items.slice().sort((a, b) => a.quantity - b.quantity);
   } else {
@@ -52,6 +57,7 @@ const List = ({ items, handleDelete, handleChecked }) => {
           <option value="packed"> Sort by packed</option>
           <option value="quantity">Sort by quantity</option>
         </select>
+        <button onClick={clearList}>Clear list</button>
       </div>
     </div>
   );
