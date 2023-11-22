@@ -7,6 +7,7 @@ import Item from "./Custom/Item";
 
 function App() {
   const [items, setItems] = useState([]);
+  //length of items
 
   const handleAddItems = (item) => {
     setItems((prev) => [...prev, item]);
@@ -37,7 +38,7 @@ function App() {
         handleDelete={handleDelete}
         handleChecked={handleChecked}
       />
-      <Details />
+      <Details items={items} />
     </div>
   );
 }
