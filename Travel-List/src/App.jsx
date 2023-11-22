@@ -30,7 +30,7 @@ function App() {
     );
   };
   function clearList() {
-    if (items.length > 0) {
+    if (items.length > 1) {
       const confirmed = window.confirm(
         "Are you sure you want to delete all the items???"
       );
