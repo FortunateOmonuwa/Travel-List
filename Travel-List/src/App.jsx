@@ -30,7 +30,14 @@ function App() {
     );
   };
   function clearList() {
-    setItems([]);
+    if (items.length > 0) {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete all the items???"
+      );
+      if (confirmed) {
+        setItems([]);
+      }
+    }
   }
   return (
     <div className="app">
